@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import Button from './Button';
 //import ImageGallery from './ImageGallery';
-//import ImageGalleryItem from "./ImageGalleryItem";
+import ImageGalleryItem from "./ImageGalleryItem";
 //import Loader from './Loader';
 //import Modal from './Modal';
 import Searchbar from './Searchbar';
@@ -9,8 +9,11 @@ import Searchbar from './Searchbar';
 
 export default class App extends Component {
   state = {
-    //photo: null,
-    //loading: false
+    photoName: '',
+  };
+
+  handleFormSubmit = photoName => {
+    this.setState({photoName});
   };
 
   /*componentDidMount() {
@@ -18,14 +21,15 @@ export default class App extends Component {
 
     fetch('https://pixabay.com/api/?q=dogs&page=1&key=19156356-c40e703531fee6556ca92e5f2&image_type=photo&orientation=horizontal&per_page=12')
     .then(res => res.json())
-    .then(photo => this.setState({photo}))
+    .then(photo => this.setState({photo}));
     .finally(() => this.setState({loading: false}));
   }*/
 
   render() {
   return (
     <div>
-      <Searchbar/>
+      <Searchbar onSubmit={this.handleFormSubmit}/>
+      <ImageGalleryItem photoName={this.state.photoName}/>
     </div>
       /*<div>
         {this.state.loading && <h1>Загружаем...</h1>}
