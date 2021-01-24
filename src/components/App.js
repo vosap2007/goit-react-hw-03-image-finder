@@ -3,14 +3,21 @@ import React, { Component } from 'react';
 //import ImageGallery from './ImageGallery';
 import ImageGalleryItem from "./ImageGalleryItem";
 //import Loader from './Loader';
-//import Modal from './Modal';
+import Modal from './Modal';
 import Searchbar from './Searchbar';
 //import styles from '../styles.module.css';
 
 export default class App extends Component {
   state = {
-    photoName: '',
+    photoName: "",
+    showModal: false,
   };
+
+  togleModal = () => {
+    this.setState( state => ({
+      showModal: !state.showModal,
+    }) )
+  }
 
   handleFormSubmit = photoName => {
     this.setState({photoName});
@@ -30,6 +37,7 @@ export default class App extends Component {
     <div>
       <Searchbar onSubmit={this.handleFormSubmit}/>
       <ImageGalleryItem photoName={this.state.photoName}/>
+      {this.state.showModal && <Modal />}
     </div>
       /*<div>
         {this.state.loading && <h1>Загружаем...</h1>}
@@ -40,9 +48,7 @@ export default class App extends Component {
   }
 }
 
-/*<Button />
+/*        <Button />
           <ImageGallery />
-          <ImageGalleryItem />
           <Loader />
-          <Modal />
           <Searchbar />*/
