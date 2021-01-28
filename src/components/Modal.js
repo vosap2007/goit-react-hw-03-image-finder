@@ -5,13 +5,16 @@ export default class Modal extends Component {
   state = {
   };
 
-  
-
    render() { 
      return (
        <div className="Overlay">
          <div className="Modal">
-            <img src="" onClick={} alt="Image" />
+         {this.props.openModalPhoto.map(({ tags, webformatWidth }) => (
+                  <img 
+                  src={webformatWidth} 
+                  alt={tags} />
+              )
+            )}
          </div>
        </div>  
     ); 
