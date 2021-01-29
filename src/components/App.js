@@ -10,12 +10,14 @@ export default class App extends Component {
   state = {
     photoName: "",
     showModal: false,
-    photo: []
+    photo: "",
   };
+  
 
-  togleModal = () => {
+  togleModal = (photo) => {
     this.setState( state => ({
       showModal: !state.showModal,
+      photo: !state.photo ? photo : "",
     }) )
   }
 
@@ -36,9 +38,11 @@ export default class App extends Component {
       togleModal={this.togleModal}
       onPhoto={this.handlePhotoSubmit}/>
       
-      {this.state.showModal && <Modal openModalPhoto={this.state.photo}/>}
+      {this.state.showModal && <Modal openModalPhoto={this.state.photo} togleModal={this.togleModal}>
+        
+      </Modal>
+      }
     </div>
     );
   }
 }
-//{this.state.photoName && <Button />}

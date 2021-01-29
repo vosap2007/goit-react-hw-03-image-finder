@@ -5,18 +5,35 @@ export default class Modal extends Component {
   state = {
   };
 
+  componentDidMount() {
+    console.log('Это');
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillMount() {
+    console.log('ескейп');
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.togleModal();
+    }
+  };
+
+  handleOverlay = event => {
+if(event.currentTarget === event.target) {
+  this.props.togleModal();
+}
+  };
+
    render() { 
      return (
-       <div className="Overlay">
-         <div className="Modal">
-         {this.props.openModalPhoto.map(({ tags, webformatWidth }) => (
-                  <img 
-                  src={webformatWidth} 
-                  alt={tags} />
-              )
-            )}
-         </div>
-       </div>  
+      <div className="Overlay" onClick={this.handleOverlay}>
+      <div className="Modal">
+        <img src={this.props.openModalPhoto} alt="" />
+      </div>
+    </div>  
     ); 
   }
 }

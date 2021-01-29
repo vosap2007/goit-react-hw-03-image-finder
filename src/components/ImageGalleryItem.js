@@ -43,7 +43,6 @@ export default class ImageGalleryItem extends Component {
     event.preventDefault();
 
     this.props.onPhoto(this.state.photo)
-    this.setState({photo: []});
   };
 
   render() {
@@ -59,13 +58,13 @@ export default class ImageGalleryItem extends Component {
       />}
         {this.state.error && <h1>Picture {this.props.photoName} not nyen</h1>}
         {this.state.photo.length > 0 && (
-          <ul onClick={this.handlePhoto} className="ImageGallery">
-            {this.state.photo.map(({ id, tags, webformatURL, webformatWidth }) => (
+          <ul className="ImageGallery">
+            {this.state.photo.map(({ id, tags, webformatURL, webformatWidth, largeImageURL }) => (
                 <li key={id} className="ImageGalleryItem">
                   <img 
                   src={webformatURL} 
                   alt={tags} 
-                  onClick={this.props.togleModal} 
+                  onClick={() => this.props.togleModal(largeImageURL)} 
                   className="ImageGalleryItem-image"/>
                 </li>
               )
